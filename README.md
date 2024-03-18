@@ -1,6 +1,6 @@
 # How to securely store credentials and secrets in K8s using Hashicorp Vault
 
-<img src="pic/pic.JPG" width=80% margin-left="auto" margin-left="auto" /> 
+<img src="pic/pic.JPG" width="70%" margin-left="15%" /> 
 
 
 This tutorial explains how to use `hashicorp vault` to securely store and inject credentials and secrets in k8s.
