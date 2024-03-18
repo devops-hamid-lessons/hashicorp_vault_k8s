@@ -246,7 +246,9 @@ kubectl -n test-ns apply -f test-deployment.yaml
 ***
 ## Step 9. Testing
 Display the secrets written to the file /vault/secrets/dbUserPass in `test-app` pod defined in the test-deployment.yaml.
-> kubectl -n test-ns exec --stdin=true --tty=true $(kubectl -n test-ns get pod | grep test-app | cut -d " " -f1) --container test-app -- cat /vault/secrets/dbuserpass.txt
+```
+kubectl -n test-ns exec --stdin=true --tty=true $(kubectl -n test-ns get pod | grep test-app | cut -d " " -f1) --container test-app -- cat /vault/secrets/dbuserpass.txt
+```
 
 output should be as following:
 ```
