@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-app
+  labels:
+    app: vault-test
+spec:
+  selector:
+    matchLabels:
+      app: test-app
+  replicas: 1
+  template:
+    metadata:
+      annotations:
+        vault.hashicorp.com/agent-inject: "true"
+        vault.hashicorp.com/tls-skip-verify: "true"
+        vault.hashicorp.com/agent-inject-status: 'update'
+        vault.hashicorp.com/agent-inject-secret-dbUserPass.txt: "credentials/keyValue/dbUserPass"
+        vault.hashicorp.com/agent-inject-template-dbUserPass.txt: |
+          {{- with secret "credentials/keyValue/dbUserPass" -}}
+          {
+            "username" : "{{ .Data.data.username }}",
+            "password" : "{{ .Data.data.password }}"
+          }
+          {{- end }}
+        vault.hashicorp.com/role: "secret-role"
+      labels:
+        app: test-app
+    spec:
+      serviceAccountName: vault-credentials-service-account
+      containers:
+        - name: test-app
+          image: jweissig/app:0.0.1
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: vault-credentials-service-account
+  labels:
+    app: vault-test
