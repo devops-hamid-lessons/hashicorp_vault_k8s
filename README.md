@@ -7,7 +7,7 @@ This tutorial explains how to use `hashicorp vault` to securely store and inject
 
 Steps taken during this tutorial:
 1. Param value initialization
-2. TLS Credentials generation
+2. TLS Certificate generation
 3. Deployment of `hashicorp vault` using its helm chart and customized values
 4. Initialization of the `Vault` cluster
 5. Enabling key-value secrets in vault and creating an example one.
